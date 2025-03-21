@@ -43,7 +43,7 @@ export const handleSignup = () => {
       const data = await response.json();
       if (data.success) {
         alert("Registration Successful!");
-        window.location.href = "/index.html"; // Adjust if your actual route differs
+        window.location.href = "/"; // Adjust if your actual route differs
       } else {
         alert(data.message);
       }

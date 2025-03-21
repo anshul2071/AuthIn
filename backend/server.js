@@ -60,7 +60,7 @@ app.post("/login", (req, res) => {
         success: true,
         message: "Login successful",
         user,
-        redirectUrl: "/"
+        redirectUrl: "navbar.js"
       });
     } else {
       res.status(401).json({ success: false, message: "Invalid credentials" });
