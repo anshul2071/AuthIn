@@ -4,7 +4,7 @@ export function Navbar() {
     navbar.style.display = "none";
     navbar.innerHTML = `
       <div class="nav-container">
-        <h2 class="logo"> ${users} Website</h2>
+        <h2 class="logo"> Anshul's Website</h2>
         <ul class="nav-links">
           <li><a href="#">Home</a></li>
           <li><a href="#">About</a></li>
