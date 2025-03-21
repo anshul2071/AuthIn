@@ -12,17 +12,19 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
+
+// Serve the Vite build from "../dist" (assuming "server.js" is in "backend/")
+app.use(express.static(path.join(__dirname, "../dist")));
 
 const dbFilePath = path.join(__dirname, "db.json");
 
-const ensureDbExists = () => {
+function ensureDbExists() {
   if (!fs.existsSync(dbFilePath)) {
     fs.writeFileSync(dbFilePath, JSON.stringify({ users: [] }, null, 2));
   }
-};
+}
 
-const getUsers = () => {
+function getUsers() {
   try {
     ensureDbExists();
     const data = fs.readFileSync(dbFilePath, "utf-8");
@@ -32,19 +34,15 @@ const getUsers = () => {
     console.error("Error reading db.json:", error);
     return [];
   }
-};
+}
 
-const saveUsers = (users) => {
+function saveUsers(users) {
   try {
     fs.writeFileSync(dbFilePath, JSON.stringify({ users }, null, 2));
   } catch (error) {
     console.error("Error writing to db.json:", error);
   }
-};
-
-app.get("/", (req, res) => {
-  res.send("Backend API is running.");
-});
+}
 
 app.get("/users", (req, res) => {
   const users = getUsers();
@@ -57,7 +55,13 @@ app.post("/login", (req, res) => {
     const users = getUsers();
     const user = users.find(u => u.email === email && u.password === password);
     if (user) {
-      res.json({ success: true, message: "Login successful", user, redirectUrl: "/navbar.html" });
+      // Redirect to front-end root ("/"), which your SPA can handle
+      res.json({
+        success: true,
+        message: "Login successful",
+        user,
+        redirectUrl: "/"
+      });
     } else {
       res.status(401).json({ success: false, message: "Invalid credentials" });
     }
@@ -90,6 +94,11 @@ app.post("/signup", (req, res) => {
     console.error("Error during signup:", error);
     res.status(500).json({ success: false, message: "Internal server error" });
   }
+});
+
+// For a single-page app, serve index.html for any other route
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist", "index.html"));
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
