@@ -1,6 +1,6 @@
 export const handleSignup = () => {
   // The base URL for the backend mock server on port 3001:
-  const backendUrl = "http://localhost:3001";
+  const backendUrl = "https://authin-8wef.onrender.com";
 
   const signupForm = document.getElementById("signup-form");
   if (!signupForm) return;
@@ -43,7 +43,7 @@ export const handleSignup = () => {
       const data = await response.json();
       if (data.success) {
         alert("Registration Successful!");
-        window.location.href = "/login"; // Adjust if your actual route differs
+        window.location.href = "/index.html"; // Adjust if your actual route differs
       } else {
         alert(data.message);
       }
