@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/style.css">
+    <title>AuthIn</title>
+  </head>
+  <body>
+    <main>
+      <section id="signup-form" class="fade-in">
+        <h2>Register</h2>
+        <form id="signup">
+          <input type="text" placeholder="FirstName" required>
+          <input type="text" placeholder="LastName" required>
+          <input type="email" placeholder="email" required>
+          <input type="password" placeholder="password" required>
+          <input type="password" placeholder="confirm password" required>
+          <select>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
+          </select>
+          <input type="number" placeholder="age" required>
+          <button id="signup-btn">SignUp</button>
+          <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+        </form>
+      </section>
+      <section id="login-form" class="fade-out">
+        <h2>Login</h2>
+        <form id="login">
+          <input type="email" placeholder="email" required>
+          <input type="password" placeholder="password" required>
+          <button id="login-btn">Login</button>
+          <p>Don't have an account? <a href="#" id="show-register">Register</a></p>
+        </form>
+      </section>
+    </main>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
